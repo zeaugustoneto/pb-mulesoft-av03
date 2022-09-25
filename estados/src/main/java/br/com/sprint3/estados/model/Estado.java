@@ -1,6 +1,8 @@
 package br.com.sprint3.estados.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,13 +15,16 @@ public class Estado {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	
+	@Enumerated(EnumType.STRING)
 	private Regiao regiao;
 	private int populacao;
 	private String capital;
 	private double area;
 	
-
+	
+	public Estado() {
+		
+	}
 	
 	public Estado(String nome, Regiao regiao, int populacao, String capital, double area) {
 		
