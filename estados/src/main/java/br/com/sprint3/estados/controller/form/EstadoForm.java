@@ -1,16 +1,21 @@
 package br.com.sprint3.estados.controller.form;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import br.com.sprint3.estados.model.Estado;
 import br.com.sprint3.estados.model.enums.Regiao;
 
 public class EstadoForm {
+	@NotNull @NotEmpty
 	private String nome;
+	@NotNull 
 	private Regiao regiao;
+	@NotNull 
 	private int populacao;
+	@NotNull @NotEmpty
 	private String capital;
+	@NotNull 
 	private double area;
 	
 	
