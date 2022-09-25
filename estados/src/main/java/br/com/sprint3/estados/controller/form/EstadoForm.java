@@ -1,7 +1,9 @@
 package br.com.sprint3.estados.controller.form;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 
 import br.com.sprint3.estados.model.Estado;
 import br.com.sprint3.estados.model.enums.Regiao;
@@ -11,11 +13,11 @@ public class EstadoForm {
 	private String nome;
 	@NotNull 
 	private Regiao regiao;
-	@NotNull 
+	@NotNull @Min(value = 1)
 	private int populacao;
 	@NotNull @NotEmpty
 	private String capital;
-	@NotNull 
+	@NotNull @Min(value = 1)
 	private double area;
 	
 	
