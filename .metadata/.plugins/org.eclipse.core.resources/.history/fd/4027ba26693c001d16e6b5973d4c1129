@@ -1,0 +1,12 @@
+package br.com.sprint3.estados.controller.dto;
+
+public class EstadoDto {
+	
+	private Long id;
+	private String nome;
+	private Regiao regiao;
+	private String capital;
+	private int populacao;
+	private double area;
+	
+}

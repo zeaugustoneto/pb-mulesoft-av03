@@ -1,0 +1,10 @@
+package br.com.sprint3.estados.controller.dto;
+
+public class UsuarioDto {
+	
+	private Long id;
+	private String nome;
+	private String email;
+	
+
+}
