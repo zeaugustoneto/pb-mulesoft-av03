@@ -76,27 +76,18 @@ public class EstadoController {
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<EstadoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoEstadoForm form) {
-		Optional<Estado> optional = estadoRepository.findById(id);
+		Estado estado = form.atualizar(id, estadoRepository);
 
-		if (optional.isPresent()) {
-			Estado estado = form.atualizar(id, estadoRepository);
-			return ResponseEntity.ok(new EstadoDto(estado));
-		}
-
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(new EstadoDto(estado));
 
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
-		Optional<Estado> optional = estadoRepository.findById(id);
-		if (optional.isPresent()) {
-			estadoRepository.deleteById(id);
+		estadoRepository.deleteById(id);
 
-			return ResponseEntity.ok().build();
-		}
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok().build();
 	}
 
 }

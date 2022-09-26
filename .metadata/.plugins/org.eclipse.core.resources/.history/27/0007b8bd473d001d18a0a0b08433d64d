@@ -2,7 +2,6 @@ package br.com.sprint3.estados.controller;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -21,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.sprint3.estados.controller.dto.UsuarioDto;
 import br.com.sprint3.estados.controller.form.AtualizacaoUsuarioForm;
 import br.com.sprint3.estados.controller.form.UsuarioForm;
-import br.com.sprint3.estados.model.Estado;
 import br.com.sprint3.estados.model.Usuario;
 import br.com.sprint3.estados.repository.UsuarioRepository;
 
@@ -50,41 +48,9 @@ public class UsuarioController {
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioForm form){
-		
-		Optional<Usuario> optional = usuarioRepository.findById(id);
-		
-		if (optional.isPresent()) {
-		Usuario usuario = form.atualizar(id, usuarioRepository);	
+		Usuario usuario = form.atualizar(id, usuarioRepository);
 		return ResponseEntity.ok(new UsuarioDto(usuario));
 		
-		}
-		
-		return ResponseEntity.notFound().build();
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
