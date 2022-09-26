@@ -1,0 +1,8 @@
+package br.com.sprint3.estados.config.security;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TokenService {
+
+}

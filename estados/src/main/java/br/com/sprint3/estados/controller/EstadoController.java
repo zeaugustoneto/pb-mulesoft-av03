@@ -1,7 +1,7 @@
 package br.com.sprint3.estados.controller;
 
 import java.net.URI;
-import java.util.List;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -9,9 +9,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +39,9 @@ public class EstadoController {
 
 	@GetMapping
 	public Page<EstadoDto> lista(@RequestParam(required = false) Regiao regiao, Pageable paginacao) {
+		// com o pageable é possivel fazer apenas 1 filtro ou mais
+		// funciona em ingles: ?page=0&sort=populacao,desc
+		// funciona tbm junto ao filtro de regiao
 
 		
 		if (regiao == null) {

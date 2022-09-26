@@ -1,5 +1,4 @@
 
-
 INSERT INTO ESTADO (NOME, REGIAO, POPULACAO, CAPITAL, AREA) VALUES ('Rio Grande do Norte', 'Nordeste', 3409000, 'Natal', 52.797);
 INSERT INTO ESTADO (NOME, REGIAO, POPULACAO, CAPITAL, AREA) VALUES ('Bahia', 'Nordeste', 15130000, 'Salvador', 567.295);
 INSERT INTO ESTADO (NOME, REGIAO, POPULACAO, CAPITAL, AREA) VALUES ('Rio Grande do Sul', 'Sul', 11290000, 'Porto Alegre', 281.748);
@@ -9,7 +8,8 @@ INSERT INTO ESTADO (NOME, REGIAO, POPULACAO, CAPITAL, AREA) VALUES ('Minas Gerai
 INSERT INTO ESTADO (NOME, REGIAO, POPULACAO, CAPITAL, AREA) VALUES ('Roraima', 'Norte', 496936, 'Boa Vista', 223.645);
 
 
-INSERT INTO USUARIO (NOME, EMAIL, SENHA) VALUES ('Fulano de Tal', 'fulano@gmail.com', '1234fdesert');
+INSERT INTO USUARIO (NOME, EMAIL, SENHA) VALUES ('Fulano de Tal', 'fulano@gmail.com', '$2a$10$71pJsegeitkWPVvUheUWPekZTp2qGR3IafwUAdJiKu16TEuezhtGC');
+
 INSERT INTO USUARIO (NOME, EMAIL, SENHA) VALUES ('José Neto', 'joseneto@gmail.com', '123neto0000');
 INSERT INTO USUARIO (NOME, EMAIL, SENHA) VALUES ('Joao Victor Oliveira', 'vicoli10@gmail.com', 'oliveira10campinas');
 INSERT INTO USUARIO (NOME, EMAIL, SENHA) VALUES ('Eloisa Bonfim', 'bonfimeloisa@gmail.com', 'eloisa321bonfim');
