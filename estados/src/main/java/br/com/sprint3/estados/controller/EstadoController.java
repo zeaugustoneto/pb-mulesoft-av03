@@ -39,6 +39,9 @@ public class EstadoController {
 
 	@GetMapping
 	public Page<EstadoDto> lista(@RequestParam(required = false) Regiao regiao, Pageable paginacao) {
+		// com o pageable é possivel fazer apenas 1 filtro ou mais
+		// funciona em ingles: ?page=0&sort=populacao,desc
+		// funciona tbm junto ao filtro de regiao
 
 		
 		if (regiao == null) {
