@@ -1,7 +1,8 @@
 package br.com.sprint3.estados.controller.dto;
 
-import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
 
 import br.com.sprint3.estados.model.Estado;
 import br.com.sprint3.estados.model.enums.Regiao;
@@ -63,9 +64,9 @@ public class EstadoDto {
 
 
 
-	public static List<EstadoDto> converter(List<Estado> estados) {
+	public static Page<EstadoDto> converter(Page<Estado> estados) {
 		// TODO Auto-generated method stub
-		return estados.stream().map(EstadoDto::new).collect(Collectors.toList());
+		return estados.map(EstadoDto::new);
 	}
 	
 	

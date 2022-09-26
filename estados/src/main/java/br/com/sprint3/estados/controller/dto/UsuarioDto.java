@@ -1,7 +1,6 @@
 package br.com.sprint3.estados.controller.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 import br.com.sprint3.estados.model.Usuario;
 
@@ -35,10 +34,10 @@ public class UsuarioDto {
 		return senha;
 	}
 
-	public static List<UsuarioDto> converter(List<Usuario> usuarios) {
+	public static Page<UsuarioDto> converter(Page<Usuario> usuarios) {
 		// TODO Auto-generated method stub
 		
-		return usuarios.stream().map(UsuarioDto::new).collect(Collectors.toList());
+		return usuarios.map(UsuarioDto::new);
 	}
 
 	

@@ -1,13 +1,14 @@
 package br.com.sprint3.estados.controller;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.sprint3.estados.controller.dto.UsuarioDto;
 import br.com.sprint3.estados.controller.form.AtualizacaoUsuarioForm;
 import br.com.sprint3.estados.controller.form.UsuarioForm;
-import br.com.sprint3.estados.model.Estado;
 import br.com.sprint3.estados.model.Usuario;
 import br.com.sprint3.estados.repository.UsuarioRepository;
 
@@ -32,8 +32,8 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping
-	public List<UsuarioDto> lista(){
-		List<Usuario> usuarios = usuarioRepository.findAll();
+	public Page<UsuarioDto> lista(Pageable paginacao){
+		Page<Usuario> usuarios = usuarioRepository.findAll(paginacao);
 		return UsuarioDto.converter(usuarios);
 	}
 	
