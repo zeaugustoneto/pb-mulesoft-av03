@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import br.com.sprint3.estados.repository.UsuarioRepository;
 
 
 @SuppressWarnings("deprecation")
@@ -21,6 +24,11 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private AutenticacaoService autenticacaoService;
+	
+	@Autowired
+	private TokenService tokenService;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	@Override
 	@Bean
@@ -48,6 +56,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class)
 		;
 	}
 	
@@ -58,9 +67,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder().encode("12345678"));
-	}
+
 	
 	
 }

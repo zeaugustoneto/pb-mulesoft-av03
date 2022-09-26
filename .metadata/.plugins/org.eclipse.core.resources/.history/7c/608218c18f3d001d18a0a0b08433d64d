@@ -1,0 +1,5 @@
+package br.com.sprint3.estados.config.security;
+
+public class AutenticacaoFilter extends OncePerRequestFilter {
+
+}
