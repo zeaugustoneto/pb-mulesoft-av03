@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +31,7 @@ public class EstadoController {
 	@Autowired
 	private EstadoRepository estadoRepository;
 
-	@GetMapping
+	@GetMapping	
 	public List<EstadoDto> lista(Regiao regiao) {
 
 		if (regiao == null) {
@@ -47,47 +46,64 @@ public class EstadoController {
 		}
 
 	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<EstadoDto> listaId(@PathVariable Long id) {
-		Optional<Estado> estado = estadoRepository.findById(id);
-
-		if (estado.isPresent()) {
-			return ResponseEntity.ok(new EstadoDto(estado.get()));
-		}
-
-		return ResponseEntity.notFound().build();
-	}
-
-	// dto -> dados que saem da api e vão pro cliente
-	// form -> dados chegam do cliente e vão pra api
+	
+	
+    @GetMapping("/{id}")
+    public  ResponseEntity<EstadoDto> listaId(@PathVariable Long id){
+        Optional<Estado> estado = estadoRepository.findById(id);
+        
+        if(estado.isPresent()) {
+        	return ResponseEntity.ok(new EstadoDto(estado.get()));
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
+	
+	
+	//dto -> dados que saem da api e vão pro cliente
+	//form -> dados chegam do cliente e vão pra api
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<EstadoDto> cadastrar(@RequestBody @Valid EstadoForm form, UriComponentsBuilder uriBuilder) {
 		Estado estado = form.converter();
 		estadoRepository.save(estado);
-
+		
 		URI uri = uriBuilder.path("/api/v1/estados/{id}").buildAndExpand(estado.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EstadoDto(estado));
-
+		
 	}
-
+	
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<EstadoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoEstadoForm form) {
-		Estado estado = form.atualizar(id, estadoRepository);
-
+	public ResponseEntity<EstadoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoEstadoForm form){
+		Estado estado = form.atualizar(id,estadoRepository);
+	
 		return ResponseEntity.ok(new EstadoDto(estado));
-
+		
 	}
-
-	@DeleteMapping("/{id}")
-	@Transactional
-	public ResponseEntity<?> remover(@PathVariable Long id) {
-		estadoRepository.deleteById(id);
-
-		return ResponseEntity.ok().build();
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

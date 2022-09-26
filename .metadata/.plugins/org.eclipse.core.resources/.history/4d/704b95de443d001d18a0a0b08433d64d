@@ -83,7 +83,6 @@ public class EstadoController {
 	}
 
 	@DeleteMapping("/{id}")
-	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
 		estadoRepository.deleteById(id);
 
