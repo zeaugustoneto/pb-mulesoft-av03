@@ -1,7 +1,5 @@
 package br.com.sprint3.estados.controller.dto;
 
-import java.util.stream.Collectors;
-
 import org.springframework.data.domain.Page;
 
 import br.com.sprint3.estados.model.Estado;
