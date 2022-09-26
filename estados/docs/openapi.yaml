@@ -1,0 +1,218 @@
+openapi: 3.0.3
+info:
+  title: API de Estados Brasileiros
+  description: API feita com intuito de aprendizado - Cadastro, visualização edição e remoção de Estados brasileiros, e cadastro, visualização, edição e autenticação de usuários  
+  version: 0.0.1
+  contact:
+    name: Me contate
+    email: jose.souza.pb@compasso.com.br
+    url: https://github.com/zeaugustoneto
+externalDocs:
+  description: Código da API
+  url: https://github.com/zeaugustoneto/pb-mulesoft-av03
+servers:
+- url: http://localhost:8080/api/v1
+  description: API de Teste
+paths:
+  /estados:
+    get:
+      - Listar todos
+    summary: Lista todos os estados já cadastrados
+    parameters: 
+      - name: regiao
+        in: query
+        schema:
+          type: string
+      - name: pageable
+        in: query
+        schema:
+          type: array
+    responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lista"
+    post:
+      summary: Cadastra um novo registro
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                    type: integer
+                nome:
+                    type: string
+                regiao:
+                    type: string
+                populacao:
+                    type: integer
+                capital:
+                    type: string
+                area:
+                    type: number
+                
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/estados"
+        400:
+          description: "Falha"
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - autenticacao: []
+  /estados/{id}:
+  get:
+    summary: Busca dados de um registro
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/listaId"
+        404:
+          description: Registro não encontrado
+
+put:
+    summary: Atualiza dados de um registro
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/atualizar"
+        404:
+          description: Registro não encontrado
+    security: 
+    - autenticacao: []
+    delete:
+      summary: Deleta dados de um registro
+      parameters:
+      - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/estados"
+        404:
+          description: Registro não encontrado
+      security: 
+      - autenticacao: []
+/usuarios:
+    get:
+      summary: Lista todos os usuários já cadastrados
+     
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lista"
+    post: 
+      summary: Cadastra um novo usuário
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                    type: integer
+                nome:
+                    type: string
+                email:
+                    type: string
+                senha:
+                    type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/usuarios"
+        400:
+          description: "Falha"
+          content:
+            application/json:
+              schema:
+                type: object
+    /usuarios/{id}:
+    put:
+    summary: Atualiza dados de um usuário
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/atualizar"
+        404:
+          description: Registro não encontrado
+/autenticacao:
+  post: 
+      summary: Autentica um usuário
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                    type: string
+                senha:
+                    type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/usuarios"
+        400:
+          description: "Falha - usuário não autenticado"
+          content:
+            application/json:
+              schema:
+                type: object
+  securitySchemes:
+    autenticacao:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
