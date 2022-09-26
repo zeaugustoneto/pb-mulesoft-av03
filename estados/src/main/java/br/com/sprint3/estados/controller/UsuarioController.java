@@ -3,18 +3,22 @@ package br.com.sprint3.estados.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.sprint3.estados.controller.dto.UsuarioDto;
+import br.com.sprint3.estados.controller.form.AtualizacaoUsuarioForm;
 import br.com.sprint3.estados.controller.form.UsuarioForm;
 import br.com.sprint3.estados.model.Usuario;
 import br.com.sprint3.estados.repository.UsuarioRepository;
@@ -32,12 +36,21 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder) {
 		Usuario usuario = form.converter();
 		usuarioRepository.save(usuario);
 		
 		URI uri = uriBuilder.path("/api/v1/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 		return ResponseEntity.created(uri).body(new UsuarioDto(usuario));
+	}
+	
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioForm form){
+		Usuario usuario = form.atualizar(id, usuarioRepository);
+		return ResponseEntity.ok(new UsuarioDto(usuario));
+		
 	}
 	
 }
